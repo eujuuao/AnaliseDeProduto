@@ -21,8 +21,19 @@ class ProductController {
             const products = await ProdutoService.getAllProducts();
             return res.status(200).json(products)
         } catch (error) {
-        console.log("error -->", error);
+        console.error("error -->", error);
         return res.status(500).json({error: "Erro ao busacar produto"});
+        }
+    }
+
+    public async getProdutcById(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params;
+            const product = await ProdutoService.getProdutcById(Number(id));
+            return res.status(200).json(product);
+        } catch (error) {
+            console.error("Erro -->", error);
+            return res.status(404).json({ error: "Produto não encontrado"});
         }
     }
 
@@ -33,8 +44,19 @@ class ProductController {
             const updateProduct = await produtoService.updateProduct(Number(id), {name, descricao, preco});
             return res.status(200).json(updateProduct);
         } catch (error) {
-        console.log("error -->", error);
+        console.error("error -->", error);
         return res.status(400).json({ error: "Erro ao autalizar produto"});
+        }
+    }
+
+    public async deleteProduct( req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params; 
+            await ProdutoService.deleteProduct(Number(id));
+            return res.status(202).json({ message: `Produto com o id = ${id} deletado com sucesso` });
+        } catch (error) {
+            console.error("Error -->", error);
+            return res.status(400).json({ error: "Erro ao deletar produto"});
         }
     }
 }

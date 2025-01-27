@@ -27,6 +27,20 @@ class ProdutoModel {
         }
     }
 
+    public async getProdutcById(id: number) {
+        try {
+            return await prisma.produto.findUnique({
+                where: {
+                    id: id,
+                },
+            });
+        } catch (error) {
+            console.error("Erro -->", error);
+            throw error;
+            
+        }
+    }
+
     public async updateProduct(id: number, data: {name?: string; descricao?: string; preco?: number }) {
         try {
             return await prisma.produto.update({
@@ -38,9 +52,20 @@ class ProdutoModel {
                 },
             });
         } catch (error) {
-            console.log("error -->", error)
+            console.error("Erro -->", error)
             throw error;
         }
+    }
+
+    public async deleteProduct(id:number) {
+        try {
+            return await prisma.produto.delete({
+                where: { id },
+            });
+        } catch (error) {
+            console.error("Erro -->", error);
+            throw error;
+    }
     }
 
 }

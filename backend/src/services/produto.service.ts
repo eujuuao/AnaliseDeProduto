@@ -1,6 +1,4 @@
-import { Prisma } from '@prisma/client';
 import ProdutoModel from '../models/produto.model';
-import productController from '../controllers/product.controller';
 
 class ProdutoService {
     public async insertProduct(name: string, descricao: string, preco: number) {

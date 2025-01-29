@@ -1,8 +1,5 @@
 import { Request, Response } from 'express';
 import ProdutoService from '../services/produto.service';
-import { promises } from 'dns';
-import produtoService from '../services/produto.service';
-import { RawQueryArgs } from '@prisma/client/runtime/library';
 
 class ProductController {
     public async insertProduct(req: Request, res: Response): Promise<Response> {
@@ -41,7 +38,7 @@ class ProductController {
         try {
             const { id } = req.params;
             const { name, descricao, preco } = req.body;
-            const updateProduct = await produtoService.updateProduct(Number(id), {name, descricao, preco});
+            const updateProduct = await ProdutoService.updateProduct(Number(id), {name, descricao, preco});
             return res.status(200).json(updateProduct);
         } catch (error) {
         console.error("error -->", error);

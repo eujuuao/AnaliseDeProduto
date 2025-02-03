@@ -7,6 +7,7 @@ const InsertProduct: React.FC = () => {
     const [nome, setNome] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
     const [preco, setPreco] = useState<number | string>("");
+
     const navigate = useNavigate();
     
     const handleSubmit = async (e: React.FormEvent) => {e.preventDefault(); //evita o recarregamento da pagina
